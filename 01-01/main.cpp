@@ -1,7 +1,6 @@
 #include <list>
 #include <stdio.h>
 using namespace std;
-
 int main() {
 
 	list<const char*> stationList = {"Tokyo",  "Kanda",     "Akihabara", "Okachimachi",  "Ueno",       "Uguisudani",   "Nippori",   "Tabata",   "Komagome", "Sugamo",
