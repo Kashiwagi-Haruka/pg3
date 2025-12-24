@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <stdio.h>
+#include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -9,26 +9,12 @@ int main() {
 	                          "k024g0004@g.neec.ac.jp", "k024g0027@g.neec.ac.jp", "k024g0058@g.neec.ac.jp", "k022g0113@g.neec.ac.jp", "k024g0007@g.neec.ac.jp", "k024g0083@g.neec.ac.jp",
 	                          "k024g0110@g.neec.ac.jp", "k024g0066@g.neec.ac.jp", "k023g0029@g.neec.ac.jp", "k024g1030@g.neec.ac.jp"};
 
-	const string startmail = "k024g";
-	int midNum = 0;
-	const string endmail = "@g.neec.ac.jp";
+	// 並び替え
+	sort(StudentNum.begin(), StudentNum.end());
 
-	for (int i = 0; i < 10000; i++) {
-		
-		char buf[16];
-		sprintf_s(buf, sizeof(buf), "%04d", midNum); 
-		string mail = startmail + buf + endmail;
-
-
-		
-		auto itr = find(StudentNum.begin(), StudentNum.end(), mail);
-
-		if (itr != StudentNum.end()) {
-			
-			printf("%s\n", mail.c_str());
-		}
-
-		midNum++;
+	// ソート後のみ表示
+	for (const auto& s : StudentNum) {
+		cout << s << endl;
 	}
 
 	return 0;
