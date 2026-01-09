@@ -1,7 +1,7 @@
 #pragma once
 #include "ISStageSceneCommand.h"
-#include "Unit.h"
 #include "Selector.h"
+#include "Unit.h"
 
 class UnitMoveCommand : public ISStageSceneCommand {
 	Unit* unit_;
@@ -15,4 +15,5 @@ public:
 	void Exec() override;
 
 	void Undo() override;
+	Unit* GetUnit() const { return unit_; }
 };

@@ -9,5 +9,4 @@ void UnitMoveCommand::Exec() {
 	selector_->Select(nullptr);
 }
 
-void UnitMoveCommand::Undo(){ unit_->Move(prevX_, prevY_); }
-
+void UnitMoveCommand::Undo() { unit_->Move(prevX_, prevY_); }

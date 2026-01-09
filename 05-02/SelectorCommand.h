@@ -7,6 +7,7 @@ class SelectorMoveCommand : public ISStageSceneCommand {
 	Selector* selector_;
 	int dx_;
 	int dy_;
+	Unit* selectedUnit_ = nullptr;
 
 public:
 	SelectorMoveCommand(Selector* selector, int dx, int dy);
@@ -14,8 +15,8 @@ public:
 	void Exec() override;
 
 	void Undo() override;
+	Unit* GetSelectedUnit() const { return selectedUnit_; }
 };
-
 
 class SelectUnitCommand : public ISStageSceneCommand {
 	Selector* selector_;
@@ -28,7 +29,4 @@ public:
 	void Exec() override;
 
 	void Undo() override;
-	
-	
-	
 };

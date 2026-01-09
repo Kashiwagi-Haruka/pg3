@@ -25,7 +25,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		stageScene.Update();
 		stageScene.Draw();
 
-
 		// フレームの終了
 		Novice::EndFrame();
 

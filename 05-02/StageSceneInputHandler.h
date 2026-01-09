@@ -1,10 +1,10 @@
 #pragma once
 #include "ISStageSceneCommand.h"
 #include "Selector.h"
-#include "Unit.h"
 #include "SelectorCommand.h"
+#include "Unit.h"
 #include "UnitCommand.h"
-
+#include <vector>
 class StageSceneInputHandler {
 	char keys_[256]{};
 	char preKeys_[256]{};
@@ -18,5 +18,5 @@ public:
 	bool IsKeyTriggered(int dik) const { return keys_[dik] && !preKeys_[dik]; }
 	ISStageSceneCommand* HandleSelectorInput(Selector* selector, Unit* unit);
 
-	ISStageSceneCommand* HandleUnitInput(Unit* unit, Selector* selector);
+	ISStageSceneCommand* HandleUnitInput(Unit* unit, Selector* selector, const std::vector<Unit*>& units);
 };

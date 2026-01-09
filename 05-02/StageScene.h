@@ -4,7 +4,7 @@
 #include "StageSceneInputHandler.h"
 #include "Unit.h"
 #include <list>
-
+#include <vector>
 class StageScene {
 private:
 	// 入力
@@ -19,7 +19,7 @@ private:
 
 	// 操作対象
 	Selector* selector_ = nullptr;
-	Unit* unit_ = nullptr;
+	std::vector<Unit*> units_;
 
 private:
 	void ExecuteCommand();
