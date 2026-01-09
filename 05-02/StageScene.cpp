@@ -54,8 +54,9 @@ void StageScene::UndoCommand() {
 void StageScene::Update() {
 	inputHandler_->UpdateKeyState();
 
-	// Undo（Zキー）
-	if (Novice::CheckHitKey(DIK_Z)) {
+		// Undo（Ctrl + Z）
+	const bool ctrlPressed = inputHandler_->IsKeyPressed(DIK_LCONTROL) || inputHandler_->IsKeyPressed(DIK_RCONTROL);
+	if (ctrlPressed && inputHandler_->IsKeyTriggered(DIK_Z)) {
 		UndoCommand();
 		return;
 	}

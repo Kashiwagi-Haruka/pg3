@@ -1,7 +1,11 @@
 #include "Selector.h"
+#include "Unit.h"
 void Selector::Move(int dx, int dy) {
 	x_ += dx * size_;
 	y_ += dy * size_;
+	if (selectedUnit_) {
+		selectedUnit_->Move(x_, y_);
+	}
 }
 
 void Selector::Select(Unit* unit) { selectedUnit_ = unit; }
