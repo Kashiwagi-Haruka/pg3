@@ -1,7 +1,7 @@
 #pragma once
-#include "TitleState.h"
-#include "StageState.h"
 #include "ClearStates.h"
+#include "StageState.h"
+#include "TitleState.h"
 // ======================
 // ゲーム管理クラス
 // ======================

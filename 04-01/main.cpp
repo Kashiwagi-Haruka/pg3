@@ -1,8 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <Novice.h>
 #include "GameManager.h"
-
-
+#include <Novice.h>
 
 // ======================
 // メイン関数
