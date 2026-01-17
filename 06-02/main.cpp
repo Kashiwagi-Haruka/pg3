@@ -1,4 +1,3 @@
-#include <chrono>
 #include <condition_variable>
 #include <deque>
 #include <fstream>
@@ -32,20 +31,6 @@ std::string joinCells(const std::vector<std::string>& cells, const std::string& 
 	}
 	return joined.str();
 }
-
-void showMarquee(const std::string& text, size_t width, std::chrono::milliseconds delay) {
-	if (text.empty()) {
-		return;
-	}
-
-	std::string padding(width, ' ');
-	std::string scrollText = padding + text + padding;
-	for (size_t offset = 0; offset + width <= scrollText.size(); ++offset) {
-		std::cout << '\r' << scrollText.substr(offset, width) << std::flush;
-		std::this_thread::sleep_for(delay);
-	}
-	std::cout << "\r" << std::string(width, ' ') << "\r";
-}
 } // namespace
 
 int main() {
@@ -68,13 +53,12 @@ int main() {
 		std::string line;
 		while (std::getline(file, line)) {
 			auto cells = splitCsvLine(line);
-			auto message = joinCells(cells, " | ");
+			auto message = joinCells(cells, " ");
 			{
 				std::lock_guard<std::mutex> lock(mutex);
 				queue.push_back(message);
 			}
 			cv.notify_all();
-			std::this_thread::sleep_for(std::chrono::milliseconds(200));
 		}
 
 		{
@@ -84,7 +68,6 @@ int main() {
 		cv.notify_all();
 	});
 
-	const size_t marqueeWidth = 50;
 	while (true) {
 		std::unique_lock<std::mutex> lock(mutex);
 		cv.wait(lock, [&]() { return done || !queue.empty(); });
@@ -93,8 +76,7 @@ int main() {
 			std::string message = queue.front();
 			queue.pop_front();
 			lock.unlock();
-			showMarquee(message, marqueeWidth, std::chrono::milliseconds(80));
-			std::cout << '\n';
+			std::cout << message << '\n';
 			lock.lock();
 		}
 
