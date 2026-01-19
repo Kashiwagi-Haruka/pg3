@@ -4,7 +4,7 @@
 
 template<typename Type>
 
-Type min(Type a, Type b) {
+Type Min(Type a, Type b) {
 	return static_cast<Type>(std::min(a, b));
 }
 
@@ -17,9 +17,9 @@ int main() {
 	double e = 10;
 	double f = 4;
 
-	printf("%d\n", min<int>(a, b));
-	printf("%f\n", min<float>(c, d));
-	printf("%lf\n", min<double>(e, f));
+	printf("%d\n", Min<int>(a, b));
+	printf("%f\n", Min<float>(c, d));
+	printf("%lf\n", Min<double>(e, f));
 
 	return 0;
 }
