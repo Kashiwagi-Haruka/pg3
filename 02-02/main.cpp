@@ -1,33 +1,44 @@
 #include <stdio.h>
 
-int Function(int x, int y) {
-
-	if (y == 1) {
-		return x;
-	} else {
-		return Function(x * 2 - 50, y - 1);
+int RecursiveHourlyWage(int previousHourlyWage, int currentHour) {
+	if (currentHour == 1) {
+		return previousHourlyWage;
 	}
+	return RecursiveHourlyWage(previousHourlyWage * 2 - 50, currentHour - 1);
 }
 
 int main() {
-
-	int result1{};
-	int result2{};
-
-	int input = 1;
-
+	int inputHours = 1;
 	printf("何時間働いたかを入力 : ");
-	scanf_s("%d", &input);
-	if (input > 26) {
+	scanf("%d", &inputHours);
+
+	if (inputHours > 26) {
 		printf("数字が大きいため26に変更します\n\n");
-		input = 26;
+		inputHours = 26;
 	}
-	for (int i = 0; i < input; i++) {
 
-		result1 = 1226 * (i + 1);
-		result2 = Function(100, (i + 1));
+	int totalFixedWage = 0;
+	int totalRecursiveWage = 0;
+	int profitableHour = -1;
 
-		printf("[%d時間目] 固定給 %d 円　: 再帰関数給　%d 円\n", i + 1, result1, result2);
+	for (int hour = 1; hour <= inputHours; hour++) {
+		const int fixedHourlyWage = 1226;
+		const int recursiveHourlyWage = RecursiveHourlyWage(100, hour);
+
+		totalFixedWage += fixedHourlyWage;
+		totalRecursiveWage += recursiveHourlyWage;
+
+		printf("[%d時間目] 固定給累計 %d 円 : 再帰給累計 %d 円\n", hour, totalFixedWage, totalRecursiveWage);
+
+		if (profitableHour == -1 && totalRecursiveWage > totalFixedWage) {
+			profitableHour = hour;
+		}
+	}
+
+	if (profitableHour == -1) {
+		printf("\n%d時間以内では固定給のほうが高いです。\n", inputHours);
+	} else {
+		printf("\n%d時間以上働くと再帰的な賃金体系のほうが儲かります。\n", profitableHour);
 	}
 
 	return 0;
